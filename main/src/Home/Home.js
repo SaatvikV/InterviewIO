@@ -10,7 +10,7 @@ export default class Home extends Component {
         <div className="lander">
           <h1>Home page</h1>
           <form>
-            <Button variant="btn btn-success" onClick={() => history.push('/Products')}>Click this button to start the interview</Button>
+            <Button variant="btn btn-success" onClick={() => history.push('/Interview')}>Click this button to start the interview</Button>
           </form>
         </div>
       </div>
