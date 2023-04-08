@@ -9,7 +9,7 @@ def get_audio():
         audio = request.args.get('audio') #get audio from front end
         # prompt = request.args.get('prompt') #get prompt 
         
-        transcribe(file=audio, prompt=prompt)
+        speech_to_text(file=audio)
         
         return transcribe
 

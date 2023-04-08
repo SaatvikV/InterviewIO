@@ -55,11 +55,10 @@ export default class Products extends React.Component {
           handleAudioStop={(data) => this.handleAudioStop(data)}
           handleAudioUpload={(data) => this.handleAudioUpload(data)}
           handleRest={() => this.handleRest()}
-          
         />
         <form>
             <Button variant="btn btn-success" onClick={() => history.push('/Results')}>Click this button to end the interview</Button>
-          </form>
+        </form>
 
       </div>
     );
