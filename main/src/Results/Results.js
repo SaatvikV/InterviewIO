@@ -7,18 +7,20 @@ class Results extends Component {
     return (
       <div className="Results">
         <div className="lander">
-          <h1>Results</h1>
-              <h2>{sessionStorage.getItem("key")}</h2>
-            <Button variant="btn btn-success" onClick={() => this.buttonHandler("test")}>Click this button to add to history</Button>
+          <h1>Interview History</h1>
+              <h2>{sessionStorage.getItem("history")}</h2>
         </div>
       </div>
     );
   }
 
 
-    buttonHandler(string) {
-        sessionStorage.setItem("key", "test");
-        this.forceUpdate();
+    static buttonHandler(string) {
+        if (sessionStorage.getItem("history")!== null){
+           sessionStorage.setItem("history", sessionStorage.getItem("history").concat([string]));
+        } else {
+           sessionStorage.setItem("history", ["test1"])
+        }
     }
 }
 export default Results;

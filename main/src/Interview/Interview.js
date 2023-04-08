@@ -1,7 +1,7 @@
 import React from "react";
 import { Recorder } from "react-voice-recorder";
 import { Button } from 'react-bootstrap';
-
+import Results from '../Results/Results';
 import "react-voice-recorder/dist/index.css";
 import history from './../history';
 
@@ -57,6 +57,7 @@ export default class Products extends React.Component {
           handleRest={() => this.handleRest()}
         />
         <form>
+             <Button variant="btn btn-success" onClick={() => Results.buttonHandler("test")}>Click this to add to history</Button>
             <Button variant="btn btn-success" onClick={() => history.push('/Results')}>Click this button to end the interview</Button>
         </form>
 
