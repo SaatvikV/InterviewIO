@@ -1,7 +1,9 @@
 from flask import Flask, request, redirect, jsonify
 from audio_processing import *
+from ChatGPT import ChatApp
 
 api = Flask(__name__)
+app = ChatApp(model="gpt-3.5-turbo")
 
 @api.route('/audio', methods=['GET'])
 def get_audio():
@@ -9,8 +11,9 @@ def get_audio():
         audio = request.args.get('audio') #get audio from front end
         # prompt = request.args.get('prompt') #get prompt 
         
-        speech_to_text(file=audio)
-        
-        return transcribe
+        text = speech_to_text(file=audio)
+        res = app.chat(text["text"])
+
+        return res["content"]
 
 

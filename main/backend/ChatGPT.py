@@ -5,7 +5,10 @@ import openai
 class ChatApp:
     def __init__(self, model="gpt-3.5-turbo"):
         # Setting the API key to use the OpenAI API
-        openai.api_key = "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"
+        file = open("C:/Users/polas/Desktop/OpenAI_API.txt", "r")
+        key = file.read()
+        file.close()
+        openai.api_key = key
         self.model = model
         self.messages = [{"role": "system", "content": "let's roleplay a interview, where you are a representative named \
                           Adam Smith interviewing me about my background."}]

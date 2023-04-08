@@ -1,12 +1,13 @@
 # Get account key
 import sys
 sys.path.append('../../')
-import key
-
 import openai
 
 # Set API key
-openai.api_key = key.KEY
+file = open("C:/Users/polas/Desktop/OpenAI_API.txt", "r")
+key = file.read()
+file.close()
+openai.api_key = key
 
 PROMPT = 'This transcription is of an interviewee responding to a question about their background. The prompt they were given was: '
 
