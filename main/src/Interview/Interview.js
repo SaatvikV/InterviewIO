@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios"
 import { Recorder } from "react-voice-recorder";
 import { Button } from 'react-bootstrap';
 import Results from '../Results/Results';
@@ -31,7 +32,7 @@ export default class Products extends React.Component {
       method: "GET",
       url: "/test"
     }).then((response) => {
-      const res = response.body
+      const res = response.data
       console.log(res)
     }).catch((error) => {
       if(error.response) {
