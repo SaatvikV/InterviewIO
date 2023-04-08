@@ -19,7 +19,7 @@ def speech_to_text(file: str) -> str:
     """
     audio_file = open(file, 'rb')
     try:
-        return openai.Audio.transcribe('whisper-1', audio_file)['text']
+        return openai.Audio.transcribe('whisper-1', audio_file)
     except UnicodeDecodeError:
         raise Exception('could not read file')
 
