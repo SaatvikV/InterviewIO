@@ -1,10 +1,8 @@
 from ChatGPT import ChatApp
 
 app = ChatApp(model="gpt-3.5-turbo")
-def main():
-    message_list = []
-    
-    print(app.messages[1]["content"])
+def main():    
+    print(app.messages[2]["content"])
 
     while True:
         inp = input()
