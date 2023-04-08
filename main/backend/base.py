@@ -5,9 +5,9 @@ from ChatGPT import ChatApp
 api = Flask(__name__)
 app = ChatApp(model="gpt-3.5-turbo")
 
-@api.route('/audio', methods=['GET'])
+@api.route('/audio', methods=['POST'])
 def get_audio():
-    if request.method == 'GET':
+    if request.method == 'POST':
         audio = request.args.get('audio') #get audio from front end
         # prompt = request.args.get('prompt') #get prompt 
         
