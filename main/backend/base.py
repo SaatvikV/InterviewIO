@@ -17,3 +17,11 @@ def get_audio():
         return res["content"]
 
 
+@api.route('/test')
+def test():
+    request_body = {
+        "name": "yes",
+        "body": "cool"
+    }
+
+    return request_body

@@ -26,6 +26,18 @@ export default class Products extends React.Component {
   handleAudioStop(data) {
     console.log(data);
     this.setState({ audioDetails: data });
+
+    axios({
+      method: "GET",
+      url: "/test"
+    }).then((response) => {
+      const res = response.body
+      console.log(res)
+    }).catch((error) => {
+      if(error.response) {
+        console.log(error.response)
+      }
+    })
     //console.log(data);
   }
   handleAudioUpload(file) {
