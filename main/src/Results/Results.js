@@ -15,12 +15,11 @@ class Results extends Component {
   }
 
 
-    static buttonHandler(string) {
-        if (sessionStorage.getItem("history")!== null){
-           sessionStorage.setItem("history", sessionStorage.getItem("history").concat([string]));
-        } else {
-           sessionStorage.setItem("history", ["test1"])
+    static buttonHandler(convo) {
+        if (sessionStorage.getItem("history")== null){
+           sessionStorage.setItem("history", [])
         }
+        sessionStorage.setItem("history", sessionStorage.getItem("history").concat(convo));
     }
 }
 export default Results;
