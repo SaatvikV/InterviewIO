@@ -31,7 +31,6 @@ class VoiceRecorder extends React.Component {
       duration: 0,
       response: 'Hi, my name is Adam Smith. I am currently a representative of Microsoft. To start off this interview, can you tell me a little bit about yourself?'
     };
-
     this.handleResult = this.handleResult.bind(this);
     this.handleDataAvailable = this.handleDataAvailable.bind(this);
     this.startRecording = this.startRecording.bind(this);
@@ -91,9 +90,10 @@ class VoiceRecorder extends React.Component {
     }).then((response) => {
       const res = response.data
       console.log(res)
-      this.state.response = res
-      this.forceUpdate()
       this.historyStorage.push(res);
+      this.state.response = res.substring(0,res.indexOf("Score"));
+      this.forceUpdate()
+
       this.props.myHookValue({ text: this.state.response });
 
     }).catch((error) => {
@@ -103,7 +103,9 @@ class VoiceRecorder extends React.Component {
     })
 
   }
-
+    componentDidMount() {
+    this.props.myHookValue({ text: "sample" })
+    }
   render() {
     return (
 
