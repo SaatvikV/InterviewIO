@@ -59,8 +59,23 @@ export default class Products extends React.Component {
     //   }
     // })
     //console.log(data);
+    this.handleReset();
+  }
+  handleReset() {
+    const reset = {
+      url: null,
+      blob: null,
+      chunks: null,
+      duration: {
+        h: 0,
+        m: 0,
+        s: 0
+      }
+    };
+    this.setState({ audioDetails: reset });
   }
   render() {
+
     return (
       <div className="App">
         <img src="interviewer.jpg" alt="Interviewer"></img>
@@ -70,6 +85,7 @@ export default class Products extends React.Component {
           audioURL={this.state.audioDetails.url}
           showUIAudio
           handleAudioStop={(audioURL) => this.handleAudioStop(audioURL)}
+          handleReset={() => this.handleReset()}
         />
         <form>
              <Button variant="btn btn-success" onClick={() => Results.buttonHandler(["msg1", "msg2", "msg3"])}>Click this to add to history</Button>
