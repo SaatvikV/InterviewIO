@@ -10,6 +10,9 @@ export default class Home extends Component {
         <div className="lander">
           <h1>Welcome to InterviewIO!</h1>
           <form>
+            <div class="bg"></div>
+            <div class="bg bg2"></div>
+            <div class="bg bg3"></div>
             <Button variant="outline-dark" onClick={() => history.push('/Interview')}>Start interview now!</Button>
 
           </form>

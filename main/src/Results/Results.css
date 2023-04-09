@@ -1,7 +1,10 @@
+body {
+  background: #09f 50%
+}
 .Results .lander {
     padding: 20px 0;
     text-align: center;
-  }
+}
 ul {
   list-style-type: none; /* Remove bullets */
   padding: 0; /* Remove padding */

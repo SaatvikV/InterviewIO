@@ -115,7 +115,7 @@ class VoiceRecorder extends React.Component {
         <button onClick={this.stopRecording} disabled={!this.state.recording}>Stop</button>
         <p>{this.state.transcript}</p>
 
-        <Button variant="outline-dark" onClick={() => this.endHandler(this.historyStorage)}>End and Save Interview</Button>
+        <button variant="outline-dark" onClick={() => this.endHandler(this.historyStorage)}>End and Save Interview</button>
 
       </div>
     );
