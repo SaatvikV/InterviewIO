@@ -1,41 +1,80 @@
-import React from "react";
-import axios from "axios"
-import { Recorder } from "react-voice-recorder";
-import { Button } from 'react-bootstrap';
-import Results from '../Results/Results';
-import "react-voice-recorder/dist/index.css";
-import history from './../history';
-import "./Interview.css";
-import Speech from 'react-speech';
+import React from 'react';
+import axios from "axios";
 
-
-export default class Products extends React.Component {
+class VoiceRecorder extends React.Component {
   constructor(props) {
     super(props);
+
+    this.mediaRecorder = null;
+    this.audioChunks = [];
+
+    this.recognition = new window.webkitSpeechRecognition();
+    this.recognition.continuous = true;
+    this.recognition.interimResults = true;
+    this.recognition.lang = 'en-US';
+
     this.state = {
-      audioURL: null,
-      audioDetails: {
-        url: null,
-        blob: null,
-        chunks: null,
-        duration: {
-          h: 0,
-          m: 0,
-          s: 0
-        }
-      }
+      recording: false,
+      transcript: '',
+      blob: null,
+      duration: 0
     };
 
+    this.handleResult = this.handleResult.bind(this);
+    this.handleDataAvailable = this.handleDataAvailable.bind(this);
+    this.startRecording = this.startRecording.bind(this);
+    this.stopRecording = this.stopRecording.bind(this);
   }
-  handleAudioStop(record) {
-    console.log(record);
-    this.setState({ audioDetails: record });
-    
+
+  handleResult(event) {
+    const transcript = Array.from(event.results)
+      .map(result => result[0].transcript)
+      .join('');
+
+    this.setState({ transcript });
+  }
+
+  handleDataAvailable(event) {
+    if (event.data.size > 0) {
+      this.audioChunks.push(event.data);
+    }
+  }
+
+  startRecording() {
+    this.recognition.start();
+    this.recognition.addEventListener('result', this.handleResult);
+
+    navigator.mediaDevices.getUserMedia({ audio: true })
+      .then(stream => {
+        this.mediaRecorder = new MediaRecorder(stream);
+        this.mediaRecorder.addEventListener('dataavailable', this.handleDataAvailable);
+        this.mediaRecorder.start();
+      });
+
+    this.setState({ recording: true });
+  }
+
+  stopRecording() {
+    this.recognition.stop();
+    this.recognition.removeEventListener('result', this.handleResult);
+
+    this.mediaRecorder.stop();
+
+    const blob = new Blob(this.audioChunks, { type: 'audio/mp3' });
+
+    this.setState({
+      recording: false,
+      blob,
+      duration: Math.floor(this.mediaRecorder.duration / 1000)
+    });
+
+    this.audioChunks = [];
+
     axios({
       method: 'post',
       url: '/audio',
       params: {
-        'words': 'how are you?'
+        'words': this.state.transcript
       }
     }).then((response) => {
       const res = response.data
@@ -46,58 +85,17 @@ export default class Products extends React.Component {
       }
     })
 
-    // axios({
-    //   method: 'post',
-    //   url: '/test',
-    //   params: {
-    //     'firstName': 1,
-    //     'lastName': 2
-    //   }
-    // }).then((response) => {
-    //   const res = response.data
-    //   console.log(res)
-    // }).catch((error) => {
-    //   if(error.response) {
-    //     console.log(error.response)
-    //   }
-    // })
-    //console.log(data);
-    this.handleReset();
   }
-  handleReset() {
-    const reset = {
-      url: null,
-      blob: null,
-      chunks: null,
-      duration: {
-        h: 0,
-        m: 0,
-        s: 0
-      }
-    };
-    this.setState({ audioDetails: reset });
-  }
+
   render() {
-
     return (
-
-      <div className="App">
-            <Speech 
-  text="Hello! Welcome to the interview! Please tell me a bit about yourself!" 
-  voice="Google UK English Female" />
-        <Recorder
-          record={true}
-          audioURL={this.state.audioDetails.url}
-          uploadButtonDisabled = {true}
-          handleAudioStop={(audioURL) => this.handleAudioStop(audioURL)}
-          handleReset={() => this.handleReset()}
-        />
-        <form>
-             <Button variant="outline-dark" onClick={() => Results.buttonHandler(["msg1", "msg2", "msg3"])}>Click this to add to history</Button>
-            <Button variant="outline-dark" onClick={() => history.push('/Results')}>Click this button to save the interview</Button>
-        </form>
-
+      <div>
+        <button onClick={this.startRecording} disabled={this.state.recording}>Start</button>
+        <button onClick={this.stopRecording} disabled={!this.state.recording}>Stop</button>
+        <p>{this.state.transcript}</p>
       </div>
     );
   }
 }
+
+export default VoiceRecorder;
