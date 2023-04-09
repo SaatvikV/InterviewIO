@@ -13,7 +13,7 @@ export default class Home extends Component {
             <div class="bg"></div>
             <div class="bg bg2"></div>
             <div class="bg bg3"></div>
-            <Button variant="outline-dark" onClick={() => history.push('/Interview')}>Start interview now!</Button>
+            <Button className="button" variant="outline-dark" onClick={() => history.push('/Interview')}><span>Start Interview</span></Button>
 
           </form>
         </div>
