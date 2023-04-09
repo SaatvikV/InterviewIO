@@ -3,8 +3,8 @@ import sys
 sys.path.append('../../')
 import openai
 
-# Set API key
-file = open("C:/Users/polas/Desktop/OpenAI_API.txt", "r")
+# Set APIkey.text
+file = open("../APIkey.txt", "r")
 key = file.read()
 file.close()
 openai.api_key = key

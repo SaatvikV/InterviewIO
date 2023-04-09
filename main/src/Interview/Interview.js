@@ -5,7 +5,7 @@ import { Button } from 'react-bootstrap';
 import Results from '../Results/Results';
 import "react-voice-recorder/dist/index.css";
 import history from './../history';
-
+import "./Interview.css";
 
 export default class Products extends React.Component {
   constructor(props) {
@@ -63,6 +63,7 @@ export default class Products extends React.Component {
   render() {
     return (
       <div className="App">
+        <img src="interviewer.jpg" alt="Interviewer"></img>
         <Recorder
           record={true}
           title={"New recording"}

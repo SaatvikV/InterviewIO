@@ -4,8 +4,8 @@ import openai
 
 class ChatApp:
     def __init__(self, model="gpt-3.5-turbo"):
-        # Setting the API key to use the OpenAI API
-        file = open("C:/Users/polas/Desktop/OpenAI_API.txt", "r")
+        # Setting the APIkey.text to use the OpenAI API
+        file = open("../APIkey.txt", "r")
         key = file.read()
         file.close()
         openai.api_key = key
