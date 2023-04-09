@@ -6,6 +6,8 @@ import Results from '../Results/Results';
 import "react-voice-recorder/dist/index.css";
 import history from './../history';
 import "./Interview.css";
+import Speech from 'react-speech';
+
 
 export default class Products extends React.Component {
   constructor(props) {
@@ -23,6 +25,7 @@ export default class Products extends React.Component {
         }
       }
     };
+
   }
   handleAudioStop(record) {
     console.log(record);
@@ -77,7 +80,11 @@ export default class Products extends React.Component {
   render() {
 
     return (
+
       <div className="App">
+            <Speech 
+  text="Hello! Welcome to the interview! Please tell me a bit about yourself!" 
+  voice="Google UK English Female" />
         <Recorder
           record={true}
           audioURL={this.state.audioDetails.url}
