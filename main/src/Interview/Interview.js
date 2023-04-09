@@ -27,13 +27,12 @@ export default class Products extends React.Component {
   handleAudioStop(record) {
     console.log(record);
     this.setState({ audioDetails: record });
-
+    
     axios({
       method: 'post',
-      url: '/test',
+      url: '/audio',
       params: {
-        'firstName': 1,
-        'lastName': 2
+        'words': 'how are you?'
       }
     }).then((response) => {
       const res = response.data
@@ -43,6 +42,22 @@ export default class Products extends React.Component {
         console.log(error.response)
       }
     })
+
+    // axios({
+    //   method: 'post',
+    //   url: '/test',
+    //   params: {
+    //     'firstName': 1,
+    //     'lastName': 2
+    //   }
+    // }).then((response) => {
+    //   const res = response.data
+    //   console.log(res)
+    // }).catch((error) => {
+    //   if(error.response) {
+    //     console.log(error.response)
+    //   }
+    // })
     //console.log(data);
   }
   render() {
