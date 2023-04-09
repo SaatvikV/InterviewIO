@@ -35,7 +35,7 @@ class Results extends Component {
       {hist.map((data) => (
         <li key={data.ID}>
             <p></p>
-            <Button variant="outline-dark" onClick={() => this.listHandler(data.ID)}>Conversation {data.ID + 1}&nbsp;&nbsp; Date: {data.date}&nbsp;&nbsp; Time: {data.time} &nbsp;&nbsp;Conversation Length: {data.length}</Button>
+            <Button variant="success" onClick={() => this.listHandler(data.ID)}>Conversation {data.ID + 1}&nbsp;&nbsp; Date: {data.date}&nbsp;&nbsp; Time: {data.time} &nbsp;&nbsp;Conversation Length: {data.length}</Button>
         </li>
       ))}
     </ul> </div>)
@@ -48,7 +48,7 @@ class Results extends Component {
                     </li>
                 ))}
                 </ul>
-                <Button variant="outline-dark" onClick={() => this.listHandler(-1)}>Back</Button>
+                <Button variant="success" onClick={() => this.listHandler(-1)}>Back</Button>
     </div>}
         </div>
       </div>

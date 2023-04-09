@@ -2,7 +2,7 @@ import React from 'react';
 import axios from "axios";
 import { Button } from 'react-bootstrap';
 import history from './../history';
-import { useState } from 'react';
+import "./Interview.css";
 import Results from '../Results/Results'
 import { useSpeechSynthesis } from 'react-speech-kit';
 
@@ -108,15 +108,15 @@ class VoiceRecorder extends React.Component {
     }
   render() {
     return (
-
-      <div>
+      
+      <div className = "top">
         <p>{this.state.response}</p>
-        <button onClick={this.startRecording} disabled={this.state.recording}>Start</button>
-        <button onClick={this.stopRecording} disabled={!this.state.recording}>Stop</button>
+        <div>
+          <Button className="bt" variant="outline-dark" onClick={this.startRecording} disabled={this.state.recording}>Start</Button>
+          <Button className="bt" variant="outline-dark" onClick={this.stopRecording} disabled={!this.state.recording}>Stop</Button>
+        </div>
+        <Button className="bt" variant="outline-dark" onClick={() => this.endHandler(this.historyStorage)}>End and Save Interview</Button>
         <p>{this.state.transcript}</p>
-
-        <button variant="outline-dark" onClick={() => this.endHandler(this.historyStorage)}>End and Save Interview</button>
-
       </div>
     );
   }

@@ -1,25 +1,29 @@
-img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 40%;
+.top{
+    padding: 20px 0;
+    text-align: center;
 }
-svg {
-
-
-}
-
-button {
-  font-family: 'Courier New', monospace;
-  background-color: #4CAF50;
+.bt {
+  width: 200px;
+  height: 30px;
   border: none;
-  color: white;
-  padding: 8px 16px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  transition-duration: 0.3s;
+  outline: none;
+  color: #fff;
+  background: rgb(25, 186, 22);
   cursor: pointer;
+  position: relative;
+  top: 10px;
+  font-size: 13px;
+  text-transform: uppercase;
+  border-radius: 10px;
+  box-shadow: 0 7px hsl(0, 0%, 57%);
+}
+
+.bt:hover {
+  background-color: #367d38
+}
+
+.bt:active {
+  background-color: #367d38;
+  box-shadow: 0 3px rgb(99, 97, 97);
+  transform: translateY(5px);
 }
