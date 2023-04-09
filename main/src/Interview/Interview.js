@@ -78,12 +78,12 @@ export default class Products extends React.Component {
 
     return (
       <div className="App">
-        <img src="interviewer.jpg" alt="Interviewer"></img>
         <Recorder
           record={true}
           title={"New recording"}
           audioURL={this.state.audioDetails.url}
           showUIAudio
+          uploadButtonDisabled = {true}
           handleAudioStop={(audioURL) => this.handleAudioStop(audioURL)}
           handleReset={() => this.handleReset()}
         />
