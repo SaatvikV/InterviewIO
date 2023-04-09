@@ -27,9 +27,7 @@ class Results extends Component {
            <ul>
       {hist.map((data) => (
         <li key={data.time}>
-          <p>Date: {data.date}</p>
-          <p>Time: {data.time}</p>
-          <p>Conversation Length: {data.length}</p>
+            <Button variant="btn btn-success" onClick={() => console.log("click")}>Date: {data.date}&nbsp;&nbsp; Time: {data.time} &nbsp;&nbsp;Conversation Length: {data.length}</Button>
         </li>
       ))}
     </ul>
