@@ -3,6 +3,7 @@ import axios from "axios";
 import { Button } from 'react-bootstrap';
 import history from './../history';
 import "./Interview.css";
+import "./load.css"
 import Results from '../Results/Results'
 import { useSpeechSynthesis } from 'react-speech-kit';
 
@@ -15,6 +16,7 @@ function Speech(Component) {
 class VoiceRecorder extends React.Component {
   constructor(props) {
     super(props);
+    this.loading = false
     this.historyStorage = ['Hi, my name is Adam Smith. I am currently a representative of Microsoft. To start off this interview, can you tell me a little bit about yourself?'];
     this.mediaRecorder = null;
     this.audioChunks = [];
@@ -68,6 +70,7 @@ class VoiceRecorder extends React.Component {
 
   stopRecording() {
     this.recognition.stop();
+    this.loading = true;
     this.recognition.removeEventListener('result', this.handleResult);
 
     this.mediaRecorder.stop();
@@ -90,6 +93,7 @@ class VoiceRecorder extends React.Component {
     }).then((response) => {
       const res = response.data
       console.log(res)
+      this.loading = false;
       this.historyStorage.push(res);
       const index = res.indexOf("Score");
       if (index !== -1) {
@@ -112,13 +116,19 @@ class VoiceRecorder extends React.Component {
     componentDidMount() {
     this.props.myHookValue({ text: "sample" })
     }
+  
   render() {
     return (
       
       <div className = "bd">
-        <p className = "text">{this.state.response}</p>
+      {this.loading === true ? (<div className="spinner-wrap"> 
+      <div className="loading-spinner"></div></div>)
+      : (<p className = "text">{this.state.response}</p>)
+      }
+        
+        <div>
         <p className = "text">{this.state.transcript}</p>
-
+        </div>
         <div>
           <Button className="button-arounder" variant="outline-dark" onClick={this.startRecording} disabled={this.state.recording}>Start</Button>
           &nbsp;&nbsp;
