@@ -6,7 +6,6 @@ import Results from "./Results/Results";
 import Interview from "./Interview/Interview";
 import Home from "./Home/Home";
 import history from './history';
-Object.freeze(Results);
 export default class Routes extends Component {
 
     render() {

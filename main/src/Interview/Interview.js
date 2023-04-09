@@ -6,12 +6,11 @@ import { useState } from 'react';
 import Results from '../Results/Results'
 import { useSpeechSynthesis } from 'react-speech-kit';
 
-function Speech(tex) {
-    const { speak } = useSpeechSynthesis();
-    speak({text: tex});
-    return (
-    <button onClick={() => speak({ text: tex })}>Speak</button>
-  )
+function Speech(Component) {
+  return function WrappedComponent(props) {
+    const {speak} = useSpeechSynthesis();
+    return <Component {...props} myHookValue={speak} />;
+  }
 }
 class VoiceRecorder extends React.Component {
   constructor(props) {
@@ -36,6 +35,7 @@ class VoiceRecorder extends React.Component {
     this.handleDataAvailable = this.handleDataAvailable.bind(this);
     this.startRecording = this.startRecording.bind(this);
     this.stopRecording = this.stopRecording.bind(this);
+
   }
 
   handleResult(event) {
@@ -98,11 +98,12 @@ class VoiceRecorder extends React.Component {
         console.log(error.response)
       }
     })
-
+            this.props.myHookValue({ text: "this is a test" });
   }
 
   render() {
     return (
+
       <div>
         <button onClick={this.startRecording} disabled={this.state.recording}>Start</button>
         <button onClick={this.stopRecording} disabled={!this.state.recording}>Stop</button>
@@ -116,4 +117,4 @@ class VoiceRecorder extends React.Component {
   }
 }
 
-export default VoiceRecorder;
+export default Speech(VoiceRecorder);
