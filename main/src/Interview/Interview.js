@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from "axios";
+import { Button } from 'react-bootstrap';
+import history from './../history';
 
 class VoiceRecorder extends React.Component {
   constructor(props) {
@@ -97,6 +99,9 @@ class VoiceRecorder extends React.Component {
         <button onClick={this.stopRecording} disabled={!this.state.recording}>Stop</button>
         <p>{this.state.transcript}</p>
         <p>{this.state.response}</p>
+
+        <Button variant="outline-dark" onClick={() => history.push('/Results')}>Click this button to save the interview</Button>
+
       </div>
     );
   }
