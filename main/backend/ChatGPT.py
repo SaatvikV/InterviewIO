@@ -12,13 +12,12 @@ class ChatApp:
         self.model = model
         self.messages = [{"role": "system", "content": "let's roleplay a interview, where you are a representative named \
                           Adam Smith interviewing me about my background."}]
-        self.messages.append({"role": "user", "content": "Try not to ask multiple questions at once. At the bottom of each" +
+        self.messages.append({"role": "user", "content": "You are sending me questions. Try not to ask multiple questions at once. At the bottom of each" +
                               " message you send, give a score on the effectiveness of my answer to the question out" +
                               " of 10 in a section labeled \"Score:\" with extensive justification for the score. Now," +
                               " let's begin the interview as if I were a candidate!"})
         self.messages.append({"role": "assistant", "content": "Hi my name is Adam Smith. I am currently a representative of" +
-                              " microsoft. To start off this interview, can you tell me a little bit about yourself (do not" +
-                              " respond to this)?"})
+                              " Microsoft. To start off this interview, can you tell me a little bit about yourself?"})
     def chat(self, message):
         if message == "exit":
             os._exit(1)

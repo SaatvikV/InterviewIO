@@ -116,11 +116,12 @@ class VoiceRecorder extends React.Component {
     return (
       
       <div className = "bd">
-        <p>{this.state.response}</p>
-        <p>{this.state.transcript}</p>
+        <p className = "text">{this.state.response}</p>
+        <p className = "text">{this.state.transcript}</p>
 
         <div>
           <Button className="button-arounder" variant="outline-dark" onClick={this.startRecording} disabled={this.state.recording}>Start</Button>
+          &nbsp;&nbsp;
           <Button className="button-arounder" variant="outline-dark" onClick={this.stopRecording} disabled={!this.state.recording}>Stop</Button>
         </div>
         <p></p>
