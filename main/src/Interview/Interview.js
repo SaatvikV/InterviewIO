@@ -2,11 +2,20 @@ import React from 'react';
 import axios from "axios";
 import { Button } from 'react-bootstrap';
 import history from './../history';
+import { useState } from 'react';
+import Results from '../Results/Results'
+import { useSpeechSynthesis } from 'react-speech-kit';
 
+function Speech(tex) {
+    const { speak } = useSpeechSynthesis();
+    speak({text: tex});
+    return (
+    <button onClick={() => speak({ text: tex })}>Speak</button>
+  )
+}
 class VoiceRecorder extends React.Component {
   constructor(props) {
     super(props);
-
     this.mediaRecorder = null;
     this.audioChunks = [];
 
@@ -99,8 +108,8 @@ class VoiceRecorder extends React.Component {
         <button onClick={this.stopRecording} disabled={!this.state.recording}>Stop</button>
         <p>{this.state.transcript}</p>
         <p>{this.state.response}</p>
-
-        <Button variant="outline-dark" onClick={() => history.push('/Results')}>Click this button to save the interview</Button>
+        <Button variant="outline-dark" onClick={() => history.push('/Results')}>End Interview Now</Button>
+        <Button variant="outline-dark" onClick={() => Results.buttonHandler(["1", '2', "3"])}>Add to History</Button>
 
       </div>
     );
