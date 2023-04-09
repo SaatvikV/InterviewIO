@@ -8,9 +8,9 @@ export default class Home extends Component {
     return (
       <div className="Home">
         <div className="lander">
-          <h1>Home page</h1>
+          <h1>Welcome to InterviewIO!</h1>
           <form>
-            <Button variant="btn btn-success" onClick={() => history.push('/Interview')}>Click this button to start the interview</Button>
+            <Button variant="outline-dark" onClick={() => history.push('/Interview')}>Click this button to start the interview</Button>
           </form>
         </div>
       </div>

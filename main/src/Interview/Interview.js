@@ -80,16 +80,14 @@ export default class Products extends React.Component {
       <div className="App">
         <Recorder
           record={true}
-          title={"New recording"}
           audioURL={this.state.audioDetails.url}
-          showUIAudio
           uploadButtonDisabled = {true}
           handleAudioStop={(audioURL) => this.handleAudioStop(audioURL)}
           handleReset={() => this.handleReset()}
         />
         <form>
-             <Button variant="btn btn-success" onClick={() => Results.buttonHandler(["msg1", "msg2", "msg3"])}>Click this to add to history</Button>
-            <Button variant="btn btn-success" onClick={() => history.push('/Results')}>Click this button to save the interview</Button>
+             <Button variant="outline-dark" onClick={() => Results.buttonHandler(["msg1", "msg2", "msg3"])}>Click this to add to history</Button>
+            <Button variant="outline-dark" onClick={() => history.push('/Results')}>Click this button to save the interview</Button>
         </form>
 
       </div>
