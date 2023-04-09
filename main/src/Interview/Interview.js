@@ -15,6 +15,7 @@ function Speech(Component) {
 class VoiceRecorder extends React.Component {
   constructor(props) {
     super(props);
+    this.historyStorage = ['Hi, my name is Adam Smith. I am currently a representative of Microsoft. To start off this interview, can you tell me a little bit about yourself?'];
     this.mediaRecorder = null;
     this.audioChunks = [];
 
@@ -28,7 +29,7 @@ class VoiceRecorder extends React.Component {
       transcript: '',
       blob: null,
       duration: 0,
-      response: ''
+      response: 'Hi, my name is Adam Smith. I am currently a representative of Microsoft. To start off this interview, can you tell me a little bit about yourself?'
     };
 
     this.handleResult = this.handleResult.bind(this);
@@ -71,7 +72,6 @@ class VoiceRecorder extends React.Component {
     this.recognition.removeEventListener('result', this.handleResult);
 
     this.mediaRecorder.stop();
-
     const blob = new Blob(this.audioChunks, { type: 'audio/mp3' });
 
     this.setState({
@@ -81,7 +81,7 @@ class VoiceRecorder extends React.Component {
     });
 
     this.audioChunks = [];
-
+    this.historyStorage.push(this.state.transcript);
     axios({
       method: 'post',
       url: '/audio',
@@ -92,28 +92,35 @@ class VoiceRecorder extends React.Component {
       const res = response.data
       console.log(res)
       this.state.response = res
+      this.forceUpdate()
+      this.historyStorage.push(res);
+      this.props.myHookValue({ text: this.state.response });
 
     }).catch((error) => {
       if(error.response) {
         console.log(error.response)
       }
     })
-            this.props.myHookValue({ text: "this is a test" });
+
   }
 
   render() {
     return (
 
       <div>
+        <p>{this.state.response}</p>
         <button onClick={this.startRecording} disabled={this.state.recording}>Start</button>
         <button onClick={this.stopRecording} disabled={!this.state.recording}>Stop</button>
         <p>{this.state.transcript}</p>
-        <p>{this.state.response}</p>
-        <Button variant="outline-dark" onClick={() => history.push('/Results')}>End Interview Now</Button>
-        <Button variant="outline-dark" onClick={() => Results.buttonHandler(["1", '2', "3"])}>Add to History</Button>
+
+        <Button variant="outline-dark" onClick={() => this.endHandler(this.historyStorage)}>End Interview Now</Button>
 
       </div>
     );
+  }
+  endHandler(convo) {
+    Results.buttonHandler(convo);
+    history.push('/Results');
   }
 }
 
