@@ -17,11 +17,10 @@ if False:
             return res["content"]
 
 
-@api.route('/test')
+@api.route('/test', methods=['POST', 'GET'])
 def test():
-    request_body = {
-        "name": "yes",
-        "body": "cool"
-    }
 
-    return request_body
+    return {
+        "name": request.args.get('firstName'),
+        "last": request.args.get('lastName')
+    }
