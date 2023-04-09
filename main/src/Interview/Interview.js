@@ -72,7 +72,7 @@ export default class Products extends React.Component {
         />
         <form>
              <Button variant="btn btn-success" onClick={() => Results.buttonHandler(["msg1", "msg2", "msg3"])}>Click this to add to history</Button>
-            <Button variant="btn btn-success" onClick={() => history.push('/Results')}>Click this button to end the interview</Button>
+            <Button variant="btn btn-success" onClick={() => history.push('/Results')}>Click this button to save the interview</Button>
         </form>
 
       </div>
