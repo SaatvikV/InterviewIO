@@ -10,10 +10,12 @@ def get_audio():
         audio = request.args.get('audio') #get audio from front end
         # prompt = request.args.get('prompt') #get prompt
 
-        text = speech_to_text(file=audio)
-        res = app.chat(text["text"])
+        # text = speech_to_text(file=audio)
+        # res = app.chat(text["text"])
 
-        return res["content"]
+
+
+        # return res["content"]
 
 
 @api.route('/test', methods=['POST', 'GET'])
