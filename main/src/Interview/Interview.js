@@ -91,7 +91,13 @@ class VoiceRecorder extends React.Component {
       const res = response.data
       console.log(res)
       this.historyStorage.push(res);
-      this.state.response = res.substring(0,res.indexOf("Score"));
+      const index = res.indexOf("Score");
+      if (index !== -1) {
+        this.state.response = res.substring(0,index);
+      } else {
+        this.state.response = res
+      }
+
       this.forceUpdate()
 
       this.props.myHookValue({ text: this.state.response });
