@@ -17,7 +17,8 @@ class VoiceRecorder extends React.Component {
       recording: false,
       transcript: '',
       blob: null,
-      duration: 0
+      duration: 0,
+      response: ''
     };
 
     this.handleResult = this.handleResult.bind(this);
@@ -79,6 +80,8 @@ class VoiceRecorder extends React.Component {
     }).then((response) => {
       const res = response.data
       console.log(res)
+      this.state.response = res
+
     }).catch((error) => {
       if(error.response) {
         console.log(error.response)
@@ -93,6 +96,7 @@ class VoiceRecorder extends React.Component {
         <button onClick={this.startRecording} disabled={this.state.recording}>Start</button>
         <button onClick={this.stopRecording} disabled={!this.state.recording}>Stop</button>
         <p>{this.state.transcript}</p>
+        <p>{this.state.response}</p>
       </div>
     );
   }
